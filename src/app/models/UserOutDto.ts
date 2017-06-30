@@ -1,3 +1,5 @@
+import { GroupOutDto } from './GroupOutDto';
+
 export interface UserOutDto {
   id: number;
   username: string;
