@@ -1,7 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
-import { LoginInDto } from '../models/LoginInDto';
+import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
+import { LoginInDto } from '../models/LoginInDto';
+import { UserInfoResponse } from '../models/UserInfoResponse';
+import { EmptyOkResponse } from '../models/EmptyOkResponse';
 
 @Injectable()
 export class AuthService {
@@ -10,17 +13,17 @@ export class AuthService {
     private http: Http
   ) { }
 
-  login(user: LoginInDto) {
+  login(user: LoginInDto): Observable<UserInfoResponse> {
     return this.http.get('/security/login')
       .map(res => res.json());
   }
 
-  logout() {
+  logout(): Observable<UserInfoResponse> {
     return this.http.get('/security/logout')
       .map(res => res.json());
   }
 
-  restoreSession() {
+  restoreSession(): Observable<EmptyOkResponse> {
     return this.http.get('/security/restore-session')
       .map(res => res.json());
   }
