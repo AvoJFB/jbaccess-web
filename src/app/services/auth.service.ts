@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
+import { LoginInDto } from '../models/LoginInDto';
 
 @Injectable()
 export class AuthService {
