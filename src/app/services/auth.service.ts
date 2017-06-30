@@ -19,12 +19,12 @@ export class AuthService {
       .map(res => res.json());
   }
 
-  logout(): Observable<UserInfoResponse> {
+  logout(): Observable<EmptyOkResponse> {
     return this.http.get('/security/logout')
       .map(res => res.json());
   }
 
-  restoreSession(): Observable<EmptyOkResponse> {
+  restoreSession(): Observable<UserInfoResponse> {
     return this.http.get('/security/restore-session')
       .map(res => res.json());
   }
