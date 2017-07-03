@@ -15,7 +15,7 @@ export class AuthService {
   ) { }
 
   login(user: LoginInDto): Observable<UserInfoResponse> {
-    return this.http.get('/security/login')
+    return this.http.get('/security/login', user)
       .map(res => res.json());
   }
 
