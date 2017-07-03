@@ -7,6 +7,8 @@ import { PersonResponse } from '../models/PersonResponse';
 import { PersonInDto } from '../models/PersonInDto';
 import { EmptyOkResponse } from '../models/EmptyOkResponse';
 import { AllKeysResponse } from '../models/AllKeysResponse';
+import { AllRolesResponse } from '../models/AllRolesResponse';
+
 
 @Injectable()
 export class PersonnelService {
@@ -44,6 +46,14 @@ export class PersonnelService {
     params.set('id', id);
 
     return this.http.get(`/person/${id}/keys`)
+      .map(res => res.json());
+  }
+
+  getPersonsRoles(id): Observable<AllRolesResponse> {
+    const params = new URLSearchParams();
+    params.set('id', id);
+
+    return this.http.get(`/person/${id}/roles`)
       .map(res => res.json());
   }
 }
