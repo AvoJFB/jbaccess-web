@@ -78,7 +78,7 @@ export class PersonnelService {
   }
 
   getAllPersonnel(): Observable<AllPersonnelResponse> {
-    return this.http.get('person')
+    return this.http.get('/person')
       .map(res => res.json());
   }
 }
