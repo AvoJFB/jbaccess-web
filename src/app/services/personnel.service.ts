@@ -65,4 +65,13 @@ export class PersonnelService {
     return this.http.put(`/person/${person_id}/roles/${role_id}`, { search: params })
       .map(res => res.json());
   }
+
+  detachRoleFromPerson(person_id, role_id): Observable<EmptyOkResponse> {
+    const params = new URLSearchParams();
+    params.set('person_id', person_id);
+    params.set('role_id', role_id);
+
+    return this.http.delete(`/person/${person_id}/roles/${role_id}`, { search: params })
+      .map(res => res.json());
+  }
 }
