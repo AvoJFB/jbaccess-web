@@ -96,4 +96,13 @@ export class PersonnelService {
     return this.http.post(`/person/${person_id}/allow/${place_id}`, { search: params })
       .map(res => res.json());
   }
+
+  denyPlaceForPerson(person_id, place_id): Observable<PersonAclResponse> {
+    const params = new URLSearchParams();
+    params.set('person_id', person_id);
+    params.set('place_id', place_id);
+
+    return this.http.post(`/person/${person_id}/deny/${place_id}`, { search: params })
+      .map(res => res.json());
+  }
 }
