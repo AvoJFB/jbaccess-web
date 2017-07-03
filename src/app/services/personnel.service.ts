@@ -5,6 +5,7 @@ import 'rxjs/add/operator/map';
 
 import { PersonResponse } from '../models/PersonResponse';
 import { PersonInDto } from '../models/PersonInDto';
+import {EmptyOkResponse} from "../models/EmptyOkResponse";
 
 @Injectable()
 export class PersonnelService {
@@ -26,6 +27,14 @@ export class PersonnelService {
     params.set('id', id);
 
     return this.http.put(`/person/${id}`, person)
+      .map(res => res.json());
+  }
+
+  deletePersonById(id): Observable<EmptyOkResponse> {
+    const params = new URLSearchParams();
+    params.set('id', id);
+
+    return this.http.delete(`/person/${id}`)
       .map(res => res.json());
   }
 }
