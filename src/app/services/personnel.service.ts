@@ -29,7 +29,7 @@ export class PersonnelService {
     const params = new URLSearchParams();
     params.set('id', id);
 
-    return this.http.put(`/person/${id}`, person)
+    return this.http.put(`/person/${id}`, { search: params }, person)
       .map(res => res.json());
   }
 
@@ -37,7 +37,7 @@ export class PersonnelService {
     const params = new URLSearchParams();
     params.set('id', id);
 
-    return this.http.delete(`/person/${id}`)
+    return this.http.delete(`/person/${id}`, { search: params })
       .map(res => res.json());
   }
 
@@ -45,7 +45,7 @@ export class PersonnelService {
     const params = new URLSearchParams();
     params.set('id', id);
 
-    return this.http.get(`/person/${id}/keys`)
+    return this.http.get(`/person/${id}/keys`, { search: params })
       .map(res => res.json());
   }
 
@@ -53,7 +53,7 @@ export class PersonnelService {
     const params = new URLSearchParams();
     params.set('id', id);
 
-    return this.http.get(`/person/${id}/roles`)
+    return this.http.get(`/person/${id}/roles`, { search: params })
       .map(res => res.json());
   }
 
