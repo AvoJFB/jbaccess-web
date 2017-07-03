@@ -5,7 +5,7 @@ import 'rxjs/add/operator/map';
 
 import { PersonResponse } from '../models/PersonResponse';
 import { PersonInDto } from '../models/PersonInDto';
-import {EmptyOkResponse} from "../models/EmptyOkResponse";
+import { EmptyOkResponse } from '../models/EmptyOkResponse';
 
 @Injectable()
 export class PersonnelService {
