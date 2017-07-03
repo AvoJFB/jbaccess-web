@@ -6,6 +6,7 @@ import 'rxjs/add/operator/map';
 import { PersonResponse } from '../models/PersonResponse';
 import { PersonInDto } from '../models/PersonInDto';
 import { EmptyOkResponse } from '../models/EmptyOkResponse';
+import { AllKeysResponse } from '../models/AllKeysResponse';
 
 @Injectable()
 export class PersonnelService {
@@ -35,6 +36,14 @@ export class PersonnelService {
     params.set('id', id);
 
     return this.http.delete(`/person/${id}`)
+      .map(res => res.json());
+  }
+
+  getPersonsKeys(id): Observable<AllKeysResponse> {
+    const params = new URLSearchParams();
+    params.set('id', id);
+
+    return this.http.get(`/person/${id}/keys`)
       .map(res => res.json());
   }
 }
