@@ -81,4 +81,9 @@ export class PersonnelService {
     return this.http.get('/person')
       .map(res => res.json());
   }
+
+  createPerson(person: PersonInDto): Observable<PersonResponse> {
+    return this.http.post('/person', person)
+      .map(res => res.json());
+  }
 }
