@@ -9,6 +9,7 @@ import { EmptyOkResponse } from '../models/EmptyOkResponse';
 import { AllKeysResponse } from '../models/AllKeysResponse';
 import { AllRolesResponse } from '../models/AllRolesResponse';
 import { AllPersonnelResponse } from '../models/AllPersonnelResponse';
+import { PersonAclResponse } from '../models/PersonAclResponse';
 
 
 
@@ -19,7 +20,7 @@ export class PersonnelService {
     private http: Http
   ) { }
 
-  getPersonById(id): Observable<PersonResponse> {
+  getPerson(id): Observable<PersonResponse> {
     const params = new URLSearchParams();
     params.set('id', id);
 
@@ -27,7 +28,7 @@ export class PersonnelService {
       .map(res => res.json());
   }
 
-  updatePersonById(id, person: PersonInDto): Observable<PersonResponse> {
+  updatePerson(id, person: PersonInDto): Observable<PersonResponse> {
     const params = new URLSearchParams();
     params.set('id', id);
 
@@ -35,7 +36,7 @@ export class PersonnelService {
       .map(res => res.json());
   }
 
-  deletePersonById(id): Observable<EmptyOkResponse> {
+  deletePerson(id): Observable<EmptyOkResponse> {
     const params = new URLSearchParams();
     params.set('id', id);
 
@@ -43,7 +44,7 @@ export class PersonnelService {
       .map(res => res.json());
   }
 
-  getPersonsKeys(id): Observable<AllKeysResponse> {
+  getKeysByPerson(id): Observable<AllKeysResponse> {
     const params = new URLSearchParams();
     params.set('id', id);
 
@@ -51,7 +52,7 @@ export class PersonnelService {
       .map(res => res.json());
   }
 
-  getPersonsRoles(id): Observable<AllRolesResponse> {
+  getRolesByPerson(id): Observable<AllRolesResponse> {
     const params = new URLSearchParams();
     params.set('id', id);
 
@@ -84,6 +85,15 @@ export class PersonnelService {
 
   createPerson(person: PersonInDto): Observable<PersonResponse> {
     return this.http.post('/person', person)
+      .map(res => res.json());
+  }
+
+  allowPlaceForPerson(person_id, place_id): Observable<PersonAclResponse> {
+    const params = new URLSearchParams();
+    params.set('person_id', person_id);
+    params.set('place_id', place_id);
+
+    return this.http.post(`/person/${person_id}/allow/${place_id}`, { search: params })
       .map(res => res.json());
   }
 }
