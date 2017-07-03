@@ -8,6 +8,8 @@ import { PersonInDto } from '../models/PersonInDto';
 import { EmptyOkResponse } from '../models/EmptyOkResponse';
 import { AllKeysResponse } from '../models/AllKeysResponse';
 import { AllRolesResponse } from '../models/AllRolesResponse';
+import { AllPersonnelResponse } from '../models/AllPersonnelResponse';
+
 
 
 @Injectable()
@@ -72,6 +74,11 @@ export class PersonnelService {
     params.set('role_id', role_id);
 
     return this.http.delete(`/person/${person_id}/roles/${role_id}`, { search: params })
+      .map(res => res.json());
+  }
+
+  getAllPersonnel(): Observable<AllPersonnelResponse> {
+    return this.http.get('person')
       .map(res => res.json());
   }
 }
