@@ -10,7 +10,7 @@ import { AllKeysResponse } from '../models/AllKeysResponse';
 import { AllRolesResponse } from '../models/AllRolesResponse';
 import { AllPersonnelResponse } from '../models/AllPersonnelResponse';
 import { PersonAclResponse } from '../models/PersonAclResponse';
-
+import { AllPersonAclsResponse } from '../models/AllPersonAclsResponse';
 
 
 @Injectable()
@@ -103,6 +103,14 @@ export class PersonnelService {
     params.set('place_id', place_id);
 
     return this.http.post(`/person/${person_id}/deny/${place_id}`, { search: params })
+      .map(res => res.json());
+  }
+
+  getPersonACLs(id): Observable<AllPersonAclsResponse> {
+    const params = new URLSearchParams();
+    params.set('id', id);
+
+    return this.http.get(`/person/${id}/acls`, { search: params })
       .map(res => res.json());
   }
 }
