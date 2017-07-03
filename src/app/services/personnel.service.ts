@@ -16,7 +16,7 @@ export class PersonnelService {
     const params = new URLSearchParams();
     params.set('id', id);
 
-    return this.http.get(`/person/${id}`)
+    return this.http.get(`/person/${id}`, { search: params })
       .map(res => res.json());
   }
 }
