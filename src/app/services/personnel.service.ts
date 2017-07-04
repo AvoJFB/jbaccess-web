@@ -3,6 +3,7 @@ import { Http } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 
+import { environment as env} from '../../environments/environment';
 import { PersonResponse } from '../models/PersonResponse';
 import { PersonInDto } from '../models/PersonInDto';
 import { EmptyOkResponse } from '../models/EmptyOkResponse';
@@ -15,6 +16,7 @@ import { AllPersonAclsResponse } from '../models/AllPersonAclsResponse';
 
 @Injectable()
 export class PersonnelService {
+  BASE_URL: string = env.API_BASE;
 
   constructor(
     private http: Http
@@ -24,7 +26,7 @@ export class PersonnelService {
     const params = new URLSearchParams();
     params.set('id', id);
 
-    return this.http.get(`/person/${id}`, { search: params })
+    return this.http.get(`${this.BASE_URL}/person/${id}`, { search: params })
       .map(res => res.json());
   }
 
@@ -32,7 +34,7 @@ export class PersonnelService {
     const params = new URLSearchParams();
     params.set('id', id);
 
-    return this.http.put(`/person/${id}`, { search: params }, person)
+    return this.http.put(`${this.BASE_URL}/person/${id}`, { search: params }, person)
       .map(res => res.json());
   }
 
@@ -40,7 +42,7 @@ export class PersonnelService {
     const params = new URLSearchParams();
     params.set('id', id);
 
-    return this.http.delete(`/person/${id}`, { search: params })
+    return this.http.delete(`${this.BASE_URL}/person/${id}`, { search: params })
       .map(res => res.json());
   }
 
@@ -48,7 +50,7 @@ export class PersonnelService {
     const params = new URLSearchParams();
     params.set('id', id);
 
-    return this.http.get(`/person/${id}/keys`, { search: params })
+    return this.http.get(`${this.BASE_URL}/person/${id}/keys`, { search: params })
       .map(res => res.json());
   }
 
@@ -56,7 +58,7 @@ export class PersonnelService {
     const params = new URLSearchParams();
     params.set('id', id);
 
-    return this.http.get(`/person/${id}/roles`, { search: params })
+    return this.http.get(`${this.BASE_URL}/person/${id}/roles`, { search: params })
       .map(res => res.json());
   }
 
@@ -65,7 +67,7 @@ export class PersonnelService {
     params.set('person_id', person_id);
     params.set('role_id', role_id);
 
-    return this.http.put(`/person/${person_id}/roles/${role_id}`, { search: params })
+    return this.http.put(`${this.BASE_URL}/person/${person_id}/roles/${role_id}`, { search: params })
       .map(res => res.json());
   }
 
@@ -74,7 +76,7 @@ export class PersonnelService {
     params.set('person_id', person_id);
     params.set('role_id', role_id);
 
-    return this.http.delete(`/person/${person_id}/roles/${role_id}`, { search: params })
+    return this.http.delete(`${this.BASE_URL}/person/${person_id}/roles/${role_id}`, { search: params })
       .map(res => res.json());
   }
 
@@ -84,7 +86,7 @@ export class PersonnelService {
   }
 
   createPerson(person: PersonInDto): Observable<PersonResponse> {
-    return this.http.post('/person', person)
+    return this.http.post(`${this.BASE_URL}/person`, person)
       .map(res => res.json());
   }
 
@@ -93,7 +95,7 @@ export class PersonnelService {
     params.set('person_id', person_id);
     params.set('place_id', place_id);
 
-    return this.http.post(`/person/${person_id}/allow/${place_id}`, { search: params })
+    return this.http.post(`${this.BASE_URL}/person/${person_id}/allow/${place_id}`, { search: params })
       .map(res => res.json());
   }
 
@@ -102,7 +104,7 @@ export class PersonnelService {
     params.set('person_id', person_id);
     params.set('place_id', place_id);
 
-    return this.http.post(`/person/${person_id}/deny/${place_id}`, { search: params })
+    return this.http.post(`${this.BASE_URL}/person/${person_id}/deny/${place_id}`, { search: params })
       .map(res => res.json());
   }
 
@@ -110,7 +112,7 @@ export class PersonnelService {
     const params = new URLSearchParams();
     params.set('id', id);
 
-    return this.http.get(`/person/${id}/acls`, { search: params })
+    return this.http.get(`${this.BASE_URL}/person/${id}/acls`, { search: params })
       .map(res => res.json());
   }
 }
