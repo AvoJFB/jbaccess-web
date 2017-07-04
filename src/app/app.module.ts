@@ -11,9 +11,11 @@ import { LoginComponent } from './components/login/login.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { AuthService } from './services/auth.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AuthGuard } from './guards/auth.guard';
+import { NavbarComponent } from './components/navbar/navbar.component';
 
 const appRoutes: Routes = [
-  { path: '', component: DashboardComponent },
+  { path: '', component: DashboardComponent, canActivate: [AuthGuard] },
   { path: 'login', component: LoginComponent },
 ];
 
@@ -21,7 +23,8 @@ const appRoutes: Routes = [
   declarations: [
     AppComponent,
     LoginComponent,
-    DashboardComponent
+    DashboardComponent,
+    NavbarComponent
   ],
   imports: [
     RouterModule.forRoot(appRoutes),
@@ -33,7 +36,8 @@ const appRoutes: Routes = [
     SimpleNotificationsModule.forRoot()
   ],
   providers: [
-    AuthService
+    AuthService,
+    AuthGuard
   ],
   bootstrap: [AppComponent]
 })
