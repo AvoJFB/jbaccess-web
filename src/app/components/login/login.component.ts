@@ -1,9 +1,10 @@
 import { Component, OnInit, ViewContainerRef } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { FormBuilder, FormGroup, Validators} from '@angular/forms';
-import { ToastsManager } from 'ng2-toastr/ng2-toastr';
+import { NotificationsService } from 'angular2-notifications/dist';
 
 import { LoginInDto } from '../../models/LoginInDto';
+
 
 @Component({
   selector: 'app-login',
@@ -12,15 +13,20 @@ import { LoginInDto } from '../../models/LoginInDto';
 })
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
+  options = {
+    position: ['top', 'right'],
+    timeOut: 4000,
+    lastOnBottom: false,
+    pauseOnHover: true,
+    maxStack: 6,
+    animate: 'scale'
+  };
 
   constructor(
     private authService: AuthService,
     private fb: FormBuilder,
-    public toastr: ToastsManager,
-    vcr: ViewContainerRef
-  ) {
-    this.toastr.setRootViewContainerRef(vcr);
-  }
+    private notificationsService: NotificationsService
+  ) { }
 
   ngOnInit() {
     this.loginForm = this.fb.group({
@@ -29,21 +35,26 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  showSuccess() {
-    this.toastr.success('You are awesome!', 'Success!');
-  }
-
   onSubmit() {
     if (!this.loginForm.get('login').valid) {
-      alert('login is not valid');
+      this.notificationsService.error(
+        'Error',
+        'Login is not valid'
+      );
     } else if (!this.loginForm.get('password').valid) {
-      alert('password is not valid');
+      this.notificationsService.error(
+        'Error',
+        'Password is not valid'
+      );
     } else {
       const user: LoginInDto = {
         login: this.loginForm.get('login').value,
         password: this.loginForm.get('password').value
       };
-      this.showSuccess();
+      this.notificationsService.success(
+        'Success!',
+        'You have logged in!',
+      );
       console.log(`username: ${user.login}   password:${user.password}`);
     }
   }
