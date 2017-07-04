@@ -1,6 +1,7 @@
-import { Component, OnInit, ViewContainerRef } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { FormBuilder, FormGroup, Validators} from '@angular/forms';
+import { Router } from '@angular/router';
 import { NotificationsService } from 'angular2-notifications/dist';
 
 import { LoginInDto } from '../../models/LoginInDto';
@@ -13,19 +14,12 @@ import { LoginInDto } from '../../models/LoginInDto';
 })
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
-  options = {
-    position: ['top', 'right'],
-    timeOut: 4000,
-    lastOnBottom: false,
-    pauseOnHover: true,
-    maxStack: 6,
-    animate: 'scale'
-  };
 
   constructor(
     private authService: AuthService,
     private fb: FormBuilder,
-    private notificationsService: NotificationsService
+    private notificationsService: NotificationsService,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -53,9 +47,10 @@ export class LoginComponent implements OnInit {
       };
       this.notificationsService.success(
         'Success!',
-        'You have logged in!',
+        'You have logged in.',
       );
-      console.log(`username: ${user.login}   password:${user.password}`);
+      this.authService.login(user)
+        .subscribe(res => this.router.navigate(['']));
     }
   }
 }
