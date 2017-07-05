@@ -4,7 +4,7 @@ import { FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { Router } from '@angular/router';
 import { NotificationsService } from 'angular2-notifications/dist';
 
-import { LoginInDto } from '../../models/LoginInDto';
+import { LoginInDto } from '../../shared/models/LoginInDto';
 
 
 @Component({

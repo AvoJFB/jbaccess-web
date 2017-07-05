@@ -7,11 +7,7 @@ import 'rxjs/add/observable/throw';
 
 
 import { environment as env} from '../../environments/environment';
-import { LoginInDto } from '../models/LoginInDto';
-import { UserInfoResponse } from '../models/UserInfoResponse';
-import { EmptyOkResponse } from '../models/EmptyOkResponse';
-import { UserOutDto } from '../models/UserOutDto';
-
+import { LoginInDto, UserInfoResponse, EmptyOkResponse, UserOutDto } from '../shared/models/models';
 
 @Injectable()
 export class AuthService {

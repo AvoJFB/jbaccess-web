@@ -4,14 +4,17 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 
 import { environment as env} from '../../environments/environment';
-import { PersonResponse } from '../models/PersonResponse';
-import { PersonInDto } from '../models/PersonInDto';
-import { EmptyOkResponse } from '../models/EmptyOkResponse';
-import { AllKeysResponse } from '../models/AllKeysResponse';
-import { AllRolesResponse } from '../models/AllRolesResponse';
-import { AllPersonnelResponse } from '../models/AllPersonnelResponse';
-import { PersonAclResponse } from '../models/PersonAclResponse';
-import { AllPersonAclsResponse } from '../models/AllPersonAclsResponse';
+import {
+  PersonResponse,
+  PersonInDto,
+  EmptyOkResponse,
+  AllKeysResponse,
+  AllRolesResponse,
+  AllPersonnelResponse,
+  PersonAclResponse,
+  AllPersonAclsResponse
+} from '../shared/models/models';
+
 
 
 @Injectable()
