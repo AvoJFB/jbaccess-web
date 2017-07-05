@@ -45,12 +45,22 @@ export class LoginComponent implements OnInit {
         login: this.loginForm.get('login').value,
         password: this.loginForm.get('password').value
       };
-      this.notificationsService.success(
-        'Success!',
-        'You have logged in.',
-      );
       this.authService.login(user)
-        .subscribe(res => this.router.navigate(['']));
+        .subscribe(
+          res => {
+            this.router.navigate(['']);
+            this.notificationsService.success(
+              'Success!',
+              'You have logged in.',
+            );
+          },
+          error => {
+            this.notificationsService.error(
+              'Error',
+              error
+            );
+          }
+        );
     }
   }
 }

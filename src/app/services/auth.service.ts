@@ -2,12 +2,15 @@ import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/catch';
+import 'rxjs/add/observable/throw';
+
 
 import { environment as env} from '../../environments/environment';
 import { LoginInDto } from '../models/LoginInDto';
 import { UserInfoResponse } from '../models/UserInfoResponse';
 import { EmptyOkResponse } from '../models/EmptyOkResponse';
-import {UserOutDto} from '../models/UserOutDto';
+import { UserOutDto } from '../models/UserOutDto';
 
 
 @Injectable()
@@ -31,7 +34,8 @@ export class AuthService {
         localStorage.setItem('user', JSON.stringify(res.payload));
 
         return res;
-      });
+      })
+      .catch(this.handleError);
   }
 
   logout(): Observable<EmptyOkResponse> {
@@ -53,5 +57,9 @@ export class AuthService {
 
   isLoggedIn(): boolean {
     return this.loggedIn;
+  }
+
+  handleError(err: any) {
+    return Observable.throw(err.json().service.error_message || 'backend server error');
   }
 }
