@@ -19,6 +19,7 @@ export class AuthService {
     private http: Http
   ) {
     this.loggedIn = !!localStorage.getItem('user');
+    this.user = JSON.parse(localStorage.getItem('user'));
   }
 
   login(user: LoginInDto): Observable<UserInfoResponse> {
@@ -53,6 +54,10 @@ export class AuthService {
 
   isLoggedIn(): boolean {
     return this.loggedIn;
+  }
+
+  getCurrentUser(): UserOutDto {
+    return this.user;
   }
 
   handleError(err: any) {
