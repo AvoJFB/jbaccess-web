@@ -1,4 +1,14 @@
-<p>
-  navbar works!
-</p>
-<button (click)="onLogout()">Logout</button>
+<nav class="navbar navbar-default">
+  <div class="container">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="/">JBAccess</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav navbar-right">
+        <li *ngIf="!authService.isLoggedIn()"><a href="login">Login</a></li>
+        <li *ngIf="authService.isLoggedIn()"><a (click)="onLogout()" style="cursor: pointer">Logout</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
